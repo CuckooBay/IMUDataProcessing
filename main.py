@@ -39,6 +39,9 @@ def process_pc(record_filepath: str, output_path: str):
         if device_str not in record_dict.keys():
             record_dict[device_str] = []
         record_dict[device_str].append(angle_str)
+    for key in record_dict:
+        if key == 'timestep': continue
+        print("number of records for device {}:\t{}".format(key, len(record_dict[key])))
 
     # keys = record_dict.keys()
     # record_dict['timestep'] = [item[0] for item in record_dict[list(record_dict.keys())[0]]]
@@ -66,7 +69,7 @@ if __name__ == '__main__':
     parser = ArgumentParser()
     # parser.add_argument('-w', '--walker_filename', required=True, type=str)
     # parser.add_argument('-u', '--user_filename', type=str, required=True)
-    parser.add_argument('-n', '--name', type=str, required=True, help='records file name in folder records')
+    parser.add_argument('-n', '--name', type=str, help='records file name in folder records', default='WT9011DCL-BT50_1693676290713_1.txt')
 
     parser.add_argument('-o', '--output_path', type=str, required=False, default='output/output.csv', help='path to output file(csv)')
 
